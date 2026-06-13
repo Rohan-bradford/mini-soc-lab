@@ -1,0 +1,39 @@
+{
+  "title": "Mini SOC Overview",
+  "evidence_type": "design-specification",
+  "refresh_interval": "30s",
+  "time_range": "Last 24 hours",
+  "panels": [
+    {
+      "title": "Alerts by Severity",
+      "visualization": "donut",
+      "query": "rule.level:*"
+    },
+    {
+      "title": "Alert Timeline",
+      "visualization": "date_histogram",
+      "query": "rule.groups:mini_soc_lab"
+    },
+    {
+      "title": "Top Source Addresses",
+      "visualization": "table",
+      "query": "data.srcip:* OR src_ip:*"
+    },
+    {
+      "title": "Windows Security Events",
+      "visualization": "metric",
+      "query": "win.system.eventID:(4625 OR 4732)"
+    },
+    {
+      "title": "Suricata Events",
+      "visualization": "bar",
+      "query": "decoder.name:json AND data.event_type:*"
+    },
+    {
+      "title": "ATT&CK Techniques",
+      "visualization": "table",
+      "query": "rule.mitre.id:*"
+    }
+  ]
+}
+

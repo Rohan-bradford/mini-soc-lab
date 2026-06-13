@@ -1,0 +1,24 @@
+<Sysmon schemaversion="4.90">
+  <HashAlgorithms>sha256</HashAlgorithms>
+  <EventFiltering>
+    <ProcessCreate onmatch="exclude">
+      <Image condition="is">C:\Windows\System32\conhost.exe</Image>
+    </ProcessCreate>
+    <NetworkConnect onmatch="include">
+      <Image condition="end with">powershell.exe</Image>
+      <Image condition="end with">pwsh.exe</Image>
+      <Image condition="end with">curl.exe</Image>
+      <Image condition="end with">ssh.exe</Image>
+    </NetworkConnect>
+    <FileCreate onmatch="include">
+      <TargetFilename condition="begin with">C:\SOC-Lab\</TargetFilename>
+      <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+    </FileCreate>
+    <RegistryEvent onmatch="include">
+      <TargetObject condition="contains">\Run</TargetObject>
+      <TargetObject condition="contains">\Policies\</TargetObject>
+    </RegistryEvent>
+    <DnsQuery onmatch="include" />
+  </EventFiltering>
+</Sysmon>
+
