@@ -1,0 +1,24 @@
+title: Repeated DNS Queries With Beacon-Like Timing
+id: 840e6e89-5314-4b4a-9f1f-00101d8e9a07
+status: experimental
+description: Detects repeated queries to the lab-only invalid domain at regular intervals.
+author: Mini SOC Lab
+date: 2026-06-13
+references:
+    - https://attack.mitre.org/techniques/T1071/004/
+logsource:
+    category: dns
+    product: suricata
+detection:
+    selection:
+        event_type: 'dns'
+        dns.rrname|endswith: '.invalid'
+    timeframe: 10m
+    condition: selection | count() by src_ip >= 6
+falsepositives:
+    - Internal health checks using reserved test domains
+level: medium
+tags:
+    - attack.command_and_control
+    - attack.t1071.004
+

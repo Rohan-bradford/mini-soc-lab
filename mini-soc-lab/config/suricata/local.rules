@@ -1,0 +1,8 @@
+alert tcp $HOME_NET any -> $HOME_NET any (msg:"SOC LAB Possible TCP Port Sweep"; \
+  flags:S; threshold:type both, track by_src, count 15, seconds 30; \
+  classtype:network-scan; sid:990001; rev:1;)
+
+alert http $HOME_NET any -> $HOME_NET any (msg:"SOC LAB Web Attack Indicator in URI"; \
+  http.uri; pcre:"/(\.\.\/|<script|union(\+|%20)+select|or(\+|%20)+1=1)/i"; \
+  classtype:web-application-attack; sid:990002; rev:1;)
+

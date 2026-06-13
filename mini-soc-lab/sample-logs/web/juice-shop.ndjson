@@ -1,0 +1,2 @@
+{"@timestamp": "2026-06-13T09:21:40Z", "http.request.method": "GET", "http.response.status_code": 400, "scenario": "web_attack_patterns", "source_ip": "10.10.10.50", "url.original": "/rest/products/search?q=' or 1=1--", "user_agent": "SOC-Lab-Safe-Simulator/1.0"}
+{"@timestamp": "2026-06-13T09:21:50Z", "http.request.method": "GET", "http.response.status_code": 404, "scenario": "web_attack_patterns", "source_ip": "10.10.10.50", "url.original": "/assets/../../etc/passwd", "user_agent": "SOC-Lab-Safe-Simulator/1.0"}

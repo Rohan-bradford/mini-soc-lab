@@ -1,0 +1,25 @@
+title: Common Web Attack Indicators In Request URI
+id: 840e6e89-5314-4b4a-9f1f-00101d8e9a08
+status: experimental
+description: Detects traversal, script injection, and SQL injection indicators in lab web logs.
+author: Mini SOC Lab
+date: 2026-06-13
+references:
+    - https://attack.mitre.org/techniques/T1190/
+logsource:
+    category: webserver
+detection:
+    selection:
+        url.original|contains:
+            - '../'
+            - '<script'
+            - 'union select'
+            - 'or 1=1'
+    condition: selection
+falsepositives:
+    - Security testing in an approved lab
+level: high
+tags:
+    - attack.initial_access
+    - attack.t1190
+

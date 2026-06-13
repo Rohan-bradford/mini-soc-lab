@@ -1,0 +1,23 @@
+title: Account Added To Local Administrators Group
+id: 840e6e89-5314-4b4a-9f1f-00101d8e9a03
+status: experimental
+description: Detects membership additions to the built-in local Administrators group.
+author: Mini SOC Lab
+date: 2026-06-13
+references:
+    - https://attack.mitre.org/techniques/T1098/
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        EventID: 4732
+        TargetUserName: 'Administrators'
+    condition: selection
+falsepositives:
+    - Approved workstation administration
+level: high
+tags:
+    - attack.persistence
+    - attack.t1098
+

@@ -1,0 +1,49 @@
+<group name="mini_soc_lab,">
+  <rule id="100100" level="8" frequency="5" timeframe="300">
+    <if_group>authentication_failed</if_group>
+    <same_source_ip />
+    <description>Mini SOC: repeated authentication failures from one source</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+  </rule>
+
+  <rule id="100101" level="12">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\(powershell|pwsh)\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)\s-(enc|encodedcommand|nop|noninteractive)\b|windowstyle\s+hidden</field>
+    <description>Mini SOC: suspicious PowerShell command-line flags</description>
+    <mitre>
+      <id>T1059.001</id>
+    </mitre>
+  </rule>
+
+  <rule id="100102" level="12">
+    <if_sid>60154</if_sid>
+    <field name="win.system.eventID">^4732$</field>
+    <field name="win.eventdata.targetUserName">^Administrators$</field>
+    <description>Mini SOC: account added to local Administrators group</description>
+    <mitre>
+      <id>T1098</id>
+    </mitre>
+  </rule>
+
+  <rule id="100103" level="7">
+    <decoded_as>json</decoded_as>
+    <field name="event_type">^flow$</field>
+    <description>Mini SOC: Suricata flow available for port-scan correlation</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+  </rule>
+
+  <rule id="100104" level="10">
+    <decoded_as>json</decoded_as>
+    <field name="url.original" type="pcre2">(?i)(\.\./|&lt;script|union\s+select|or\s+1=1)</field>
+    <description>Mini SOC: web attack indicator in URI</description>
+    <mitre>
+      <id>T1190</id>
+    </mitre>
+  </rule>
+</group>
+
